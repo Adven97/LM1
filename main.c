@@ -77,6 +77,7 @@ int main()
         /* Uzytkownik wrzuca nieakceptowalne przez automat monety. Zostaja one zwrocone */
         else{
             printf("Wprowadzono symbol spoza alfabetu \n");
+            printf("Wrzucony element zostanie wydany \n");
         }
     }
     return 0;
