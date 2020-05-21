@@ -3,12 +3,14 @@
 #define PRICE 9
 
 /* Metoda pokazujaca wszystkie stany automatu. Liczba tych stanow jest rowna liczbie wrzuconych monet */
-void show_states(int *state_list, int len){
-    printf("LISTA STANOW \n");
+void show_states(char **state_list, int len){
+    printf("LISTA STANOW TO : [");
+
     int i;
     for(i=0; i < len; i++){
-       printf("stan %d to %s \n", i+1, state_list[i]);
+       printf(" %s ", state_list[i]);
     }
+    printf("]");
 }
 
 int main()
@@ -25,7 +27,7 @@ int main()
     int counter = 0;
 
     /* Lista stanow */
-    char **state_list;
+    char **state_list = NULL;
     for(;;)
     {
         printf("Prosze wprowadzic monete 1 2 lub 5zl \n");
@@ -62,6 +64,7 @@ int main()
             {
                 printf("Bilet zostaje wydany \n");
                 show_states(state_list, counter);
+                free(state_list);
                 return 1;
             }
 
@@ -70,6 +73,7 @@ int main()
                 printf("Bilet nie zostaje wydany \n");
                 printf("Zwracam monety \n");
                 show_states(state_list, counter);
+                free(state_list);
                 return -1;
             }
         }
