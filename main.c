@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #define PRICE 9
 
-/* Metoda pokazujaca wszystkie stany automatu. Liczba tych stanow jest rowna liczbie wrzuconych monet */
+/* Metoda pokazujaca wszystkie stany automatu. Liczba stanow jest rowna liczbie wrzuconych monet */
 void show_states(char **state_list, int len)
 {
     printf("LISTA STANOW TO : [");
@@ -20,7 +20,7 @@ int main()
     printf("BILETOMAT \n");
     printf("Bilet na Plywalnie kosztuje 9 zl \n");
 
-    /* Stan poczatkowy q0 */
+    /* Stan poczatkowy - q0 */
     char state[4] = "q0";
 
     /* Suma wrzuconych monet */
@@ -30,6 +30,7 @@ int main()
 
     /* Lista stanow */
     char **state_list = NULL;
+
     for(;;)
     {
         printf("Prosze wprowadzic monete 1 2 lub 5 zl \n");
@@ -39,12 +40,13 @@ int main()
 
         if(scanf("%d%c", &input, &term) == 2 && term == '\n')
         {
-            /* Uzytkownik wrzuca monety 1 2 lub 5. Suma wrzuconych monet deteerminuje aktualny stan */
+            /* Uzytkownik wrzuca monety 1 2 lub 5. Suma wrzuconych monet determinuje aktualny stan */
             if(input == 1 || input == 2 || input == 5)
             {
+                /* Wrzucona moneta trafia do puli */
                 sum+= input;
 
-                /* Ustawienie aktualnego stanu */
+                /* Ustawienie aktualnego stanu na podstawie sumy jaka wrzucil uzytkownik */
                 if(sum <= 9)
                 {
                     snprintf(state, 4, "q%d", sum);
@@ -65,7 +67,7 @@ int main()
                 printf("aktualny stan to %s \n", state);
                 printf("W sumie wrzucono %d zl \n", sum);
 
-                /* Stan akceptujacy */
+                /* Stan akceptujacy - uzytkownik wrzucil dokladnie 9 zl */
                 if(sum == PRICE)
                 {
                     printf("Bilet zostaje wydany \n");
@@ -74,6 +76,7 @@ int main()
                     return 1;
                 }
 
+                /* Stan nieakceptujacy - uzytkownik wrzucil wiecej niz 9 zl. Monety zostaja wydane */
                 if(sum > PRICE)
                 {
                     printf("Bilet nie zostaje wydany \n");
